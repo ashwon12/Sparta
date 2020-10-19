@@ -6,6 +6,10 @@
     <!-- Bootstrap CSS 이친구!! 필수 추가!! -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- 폰트 불러오기!-->
+    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shopping_css.css">  <!-- css파일을 불러오는 것-->
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap 자바스크립트 부분!! -->
@@ -17,13 +21,41 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
 
-    <!-- 폰트 불러오기!-->
-    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="shopping_css.css">  <!-- css파일을 불러오는 것-->
     <script>
-        function showAlert() {
-            alert('구매하실 수 없습니다!')
+        $(document).ready(function () {
+            $("#erAPI").empty()
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                    let exchangeRate = response[1]['rate'];
+                    console.log("환율은 "+ exchangeRate)
+                    $("#erAPI").append(`달러-원 환율: ${exchangeRate}`)
+                }
+            });
+        });
+
+        function isVal(){
+            let name = $("#name").val()
+            let adress = $("#adress").val()
+            let tell =$("#HP").val()
+            let rgEx = /[01](0|1|6|7|8|9)[-](\d{4}|\d{3})[-]\d{4}$/g;
+            let chekFlag = rgEx.test(tell)
+
+            if(name ===""){
+                alert("주문자 이름을 입력해주세요")
+            }else if(adress === ""){
+                alert("주소를 입력해주세요")
+            }else if(tell===""){
+                alert("핸드폰 번호를 입력해주세요")
+            }else if(!chekFlag){
+                alert("올바른 휴대폰 번호가 아닙니다")
+            }else {
+                alert("주문이 완료되었습니다.")
+            }
         }
+
     </script>
 </head>
 <body>
@@ -61,17 +93,19 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-    </div><br>
+    </div>
+    <br>
 
     <h1>버블이<span class="price">가격 : 10000000000원 / 마리</span></h1>
     <p>버블이로 말할 것 같으면 나이는 2살, 리틀비숑으로 태어나 털뚱땡이가 된 강아지입니다!(●'◡'●)
-        <br> 특기는 잠자는 언니들 얼굴핥기🐶 그리고 먹고 싶은 음식을 위해 두발로 걷기.....🤣 <br> 취미는 창틀에 앉아 바깥을 보며 지나가는 강아지보고 짖기에요! 매우매우 귀엽습니다!</p><br>
+        <br> 특기는 잠자는 언니들 얼굴핥기🐶 그리고 먹고 싶은 음식을 위해 두발로 걷기.....🤣 <br> 취미는 창틀에 앉아 바깥을 보며 지나가는 강아지보고 짖기에요! 매우매우 귀엽습니다!</p>
+    <br>
 
-    <h1>주문하기</h1>
+    <h1>주문하기<span id="erAPI">달러-원 환율 : 1010</span></h1>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">주문자 성함: </label>
+        <label class="col-sm-2 col-form-label" >주문자 성함: </label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="김OO">
+            <input type="text" class="form-control" id="name" placeholder="김OO">
         </div>
     </div>
     <div class="form-group row">
@@ -87,17 +121,18 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">주소 : </label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="도로명으로 입력해주세요!">
+            <input type="text" class="form-control" id="adress" placeholder="도로명으로 입력해주세요!">
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">전화번호 : </label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="010-xxxx-xxxx">
+            <input type="text" class="form-control" id="HP" placeholder="010-xxxx-xxxx">
         </div>
     </div>
 
-    <button type="button" onclick="showAlert()" class="btn btn-outline-dark btn-block button-size align-basic ">주문하기</button>
+    <button type="button" onclick="isVal()" class="btn btn-outline-dark btn-block button-size align-basic ">주문하기
+    </button>
 
 </div>
 </body>
