@@ -30,28 +30,28 @@
                 data: {},
                 success: function (response) {
                     let exchangeRate = response[1]['rate'];
-                    console.log("환율은 "+ exchangeRate)
+                    console.log("환율은 " + exchangeRate)
                     $("#erAPI").append(`달러-원 환율: ${exchangeRate}`)
                 }
             });
         });
 
-        function isVal(){
+        function isVal() {
             let name = $("#name").val()
             let adress = $("#adress").val()
-            let tell =$("#HP").val()
+            let tell = $("#HP").val()
             let rgEx = /[01](0|1|6|7|8|9)[-](\d{4}|\d{3})[-]\d{4}$/g;
             let chekFlag = rgEx.test(tell)
 
-            if(name ===""){
+            if (name === "") {
                 alert("주문자 이름을 입력해주세요")
-            }else if(adress === ""){
+            } else if (adress === "") {
                 alert("주소를 입력해주세요")
-            }else if(tell===""){
+            } else if (tell === "") {
                 alert("핸드폰 번호를 입력해주세요")
-            }else if(!chekFlag){
+            } else if (!chekFlag) {
                 alert("올바른 휴대폰 번호가 아닙니다")
-            }else {
+            } else {
                 alert("주문이 완료되었습니다.")
             }
         }
@@ -103,7 +103,7 @@
 
     <h1>주문하기<span id="erAPI">달러-원 환율 : 1010</span></h1>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label" >주문자 성함: </label>
+        <label class="col-sm-2 col-form-label">주문자 성함: </label>
         <div class="col-sm-10">
             <input type="text" class="form-control" id="name" placeholder="김OO">
         </div>
