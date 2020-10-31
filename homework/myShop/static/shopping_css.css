@@ -6,7 +6,7 @@
 .wrap {
     padding-top: 50px;
     padding-bottom: 150px;
-    width: 700px; /*magin auto를 사용하기 위해선 가로의 크기를 꼭 선언해주어야 한다.*/
+    width: 800px; /*magin auto를 사용하기 위해선 가로의 크기를 꼭 선언해주어야 한다.*/
     margin: auto; /*자기가 가질수 있는 좌우 마진(자기 크기를 뺀 나머지를 자동으로 계산해준다.*/
 }
 
@@ -25,8 +25,8 @@
 }
 
 .image-size {
-    width: 700px;
-    height: 400px;
+    width: 800px;
+    height: 600px;
 }
 
 .button-size {
